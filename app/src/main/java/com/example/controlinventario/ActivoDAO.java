@@ -19,7 +19,8 @@ public class ActivoDAO {
                         jsonObject.getJSONObject(""+i+"").get("NOM_ACT").toString(),
                         jsonObject.getJSONObject(""+i+"").get("EST_ACT").toString(),
                         jsonObject.getJSONObject(""+i+"").get("COD_BAR_ACT").toString(),
-                        jsonObject.getJSONObject(""+i+"").get("ID_FUN_PER").toString()));
+                        jsonObject.getJSONObject(""+i+"").get("ID_FUN_PER").toString(),
+                        jsonObject.getJSONObject(""+i+"").get("REV_ACT").toString()));
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programas/Android/controlInventarioAndroid/app/src/main/res/layout/activity_description.xml" value="0.2" />
-        <entry key="..\:/Programas/Android/controlInventarioAndroid/app/src/main/res/layout/activity_main.xml" value="0.21875" />
+        <entry key="..\:/Programas/Android/controlInventarioAndroid/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Programas/Android/controlInventarioAndroid/app/src/main/res/layout/spinner_item_procesos.xml" value="0.21875" />
+        <entry key="..\:/Programas/Android/controlInventarioAndroid/app/src/main/res/layout/tarjeta_activo.xml" value="0.2" />
         <entry key="..\:/Programas/Android/controlInventarioAndroid/app/src/main/res/layout/tarjeta_proceso.xml" value="0.21875" />
       </map>
     </option>

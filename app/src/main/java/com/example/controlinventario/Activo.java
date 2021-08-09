@@ -1,14 +1,15 @@
 package com.example.controlinventario;
 
 public class Activo {
-    private String id, nombre, estado, codBarras, idFuncionario;
+    private String id, nombre, estado, codBarras, idFuncionario, revision;
 
-    public Activo(String id, String nombre, String estado, String codBarras, String idFuncionario) {
+    public Activo(String id, String nombre, String estado, String codBarras, String idFuncionario, String revision) {
         this.id = id;
         this.nombre = nombre;
         this.estado = estado;
         this.codBarras = codBarras;
         this.idFuncionario = idFuncionario;
+        this.revision = revision;
     }
 
     public String getId() {
@@ -50,4 +51,8 @@ public class Activo {
     public void setIdFuncionario(String idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
+
+    public String getRevision() {        return revision;    }
+
+    public void setRevision(String revision) {        this.revision = revision;    }
 }
