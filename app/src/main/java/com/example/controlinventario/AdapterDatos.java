@@ -47,17 +47,23 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
-        TextView funcionario, estado;
+        TextView funcionario, estado, activos;
         public ViewHolder(View itemView) {
             super(itemView);
             iconImage = itemView.findViewById(R.id.imagen);
             funcionario = itemView.findViewById(R.id.funcio);
             estado = itemView.findViewById(R.id.status);
+            activos = itemView.findViewById(R.id.activos);
         }
 
         void bindData(final ProcesoValidacionDetalle item){
             funcionario.setText(item.getFuncionario().toString());
             estado.setText(item.getEstado());
+            if(item.getFuncionario().getNumActivos() == 1)
+                activos.setText(item.getFuncionario().getNumActivos() +" Activo");
+            else
+                activos.setText(item.getFuncionario().getNumActivos() +" Activos");
         }
+
     }
 }
