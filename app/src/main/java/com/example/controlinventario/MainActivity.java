@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         titulo = (TextView)findViewById(R.id.titulo);
         spnProcesos = (Spinner)findViewById(R.id.procesos);
-        //cargarProcesos("http://192.168.100.123/servicios/cargarProcesos.php");
-        cargarProcesos("http://192.168.100.3/servicios/cargarProcesos.php");
+        cargarProcesos("http://192.168.100.123/servicios/cargarProcesos.php");
+        //cargarProcesos("http://192.168.100.3/servicios/cargarProcesos.php");
     }
 
     public void cargarProcesos(String URL){
@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cargarDetalleProceso(String proceso){
-        //String URL = "http://192.168.100.123/servicios/cargarDetalles.php?titulo=" + proceso;
-        String URL = "http://192.168.100.3/servicios/cargarDetalles.php?titulo=" + proceso;
+        String URL = "http://192.168.100.123/servicios/cargarDetalles.php?titulo=" + proceso;
+        //String URL = "http://192.168.100.3/servicios/cargarDetalles.php?titulo=" + proceso;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
