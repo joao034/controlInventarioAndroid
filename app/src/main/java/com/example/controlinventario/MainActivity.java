@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToDescription(ProcesoValidacionDetalle item){
-        Intent intent = new Intent(this, DescriptionActivity.class);
+        Intent intent = new Intent(this,DescriptionActivity.class);
         intent.putExtra("ProcesoValidacionDetalle", item);
         startActivity(intent);
     }

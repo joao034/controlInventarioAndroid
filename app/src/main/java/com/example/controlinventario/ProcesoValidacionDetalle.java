@@ -7,7 +7,7 @@ public class ProcesoValidacionDetalle implements Serializable {
 
     private int id, procesoPertenece;
     private Funcionario funcionario;
-    private ProcesoValidacion procesoValidacion;
+    //private ProcesoValidacion procesoValidacion;
     private String observacion, estado;
 
     public ProcesoValidacionDetalle() {
@@ -21,14 +21,14 @@ public class ProcesoValidacionDetalle implements Serializable {
         this.estado = estado;
     }
 
-    public ProcesoValidacionDetalle(int id, int procesoPertenece, Funcionario funcionario, ProcesoValidacion procesoValidacion, String observacion, String estado) {
+    /*public ProcesoValidacionDetalle(int id, int procesoPertenece, Funcionario funcionario, ProcesoValidacion procesoValidacion, String observacion, String estado) {
         this.id = id;
         this.procesoPertenece = procesoPertenece;
         this.funcionario = funcionario;
         this.procesoValidacion = procesoValidacion;
         this.observacion = observacion;
         this.estado = estado;
-    }
+    }*/
 
     public int getId() {
         return id;
