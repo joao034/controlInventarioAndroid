@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,11 +15,17 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolder> 
     private Context context;
     private List<ProcesoValidacionDetalle> lista;
     private LayoutInflater inflater;
+    final AdapterDatos.OnItemClickListener listener;
 
-    public AdapterDatos(Context context, List<ProcesoValidacionDetalle> lista) {
+    public interface OnItemClickListener{
+        void onItemClick(ProcesoValidacionDetalle item);
+    }
+
+    public AdapterDatos(Context context, List<ProcesoValidacionDetalle> lista, AdapterDatos.OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.lista = lista;
+        this.listener = listener;
     }
 
     @Override
@@ -48,7 +55,7 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iconImage;
         TextView funcionario, estado, activos;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             iconImage = itemView.findViewById(R.id.imagen);
             funcionario = itemView.findViewById(R.id.funcio);
@@ -63,6 +70,13 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolder> 
                 activos.setText(item.getFuncionario().getNumActivos() +" Activo");
             else
                 activos.setText(item.getFuncionario().getNumActivos() +" Activos");
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(item);
+                }
+            });
         }
 
     }
