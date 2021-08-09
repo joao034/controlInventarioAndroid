@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         titulo = (TextView)findViewById(R.id.titulo);
         spnProcesos = (Spinner)findViewById(R.id.procesos);
-        cargarProcesos("http://192.168.100.123/servicios/cargarProcesos.php");
+        //cargarProcesos("http://192.168.100.123/servicios/cargarProcesos.php");
+        cargarProcesos("http://192.168.100.3/servicios/cargarProcesos.php");
     }
 
     public void cargarProcesos(String URL){
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 //lleno la listaProcesos
                 listaProcesos = dao.listarProcesos(response);
                 //Crea el adapter pasandole la lista de procesos
-                adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_item, listaProcesos);
+                adapter = new ArrayAdapter(MainActivity.this, R.layout.spinner_item_procesos, listaProcesos);
                 spnProcesos.setAdapter(adapter);
                 spnProcesos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -80,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cargarDetalleProceso(String proceso){
-        String URL = "http://192.168.100.123/servicios/cargarDetalles.php?titulo=" + proceso;
+        //String URL = "http://192.168.100.123/servicios/cargarDetalles.php?titulo=" + proceso;
+        String URL = "http://192.168.100.3/servicios/cargarDetalles.php?titulo=" + proceso;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -88,7 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 //lleno la listaProcesos
                 listaDetallesProceso = daoDetalle.listarProcesos(response);
                 //Crea el adapter pasandole la lista de procesos
-                AdapterDatos adapterDatos = new AdapterDatos(MainActivity.this, listaDetallesProceso);
+                AdapterDatos adapterDatos = new AdapterDatos(MainActivity.this, listaDetallesProceso, new AdapterDatos.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(ProcesoValidacionDetalle item) {
+                        moveToDescription(item);
+                    }
+                });
                 recyclerView = findViewById(R.id.res_detalle);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -102,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
         });
         queue1 = Volley.newRequestQueue(this);
         queue1.add(stringRequest);
+    }
+
+    public void moveToDescription(ProcesoValidacionDetalle item){
+        Intent intent = new Intent(this, DescriptionActivity.class);
+        intent.putExtra("ProcesoValidacionDetalle", item);
+        startActivity(intent);
     }
 
 }
