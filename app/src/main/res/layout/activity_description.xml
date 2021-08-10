@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nombreFuncionario" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+        android:id="@+id/observacion"
         android:layout_width="326dp"
         android:layout_height="68dp"
         android:layout_marginTop="16dp"
@@ -54,18 +54,19 @@
         app:layout_constraintTop_toBottomOf="@+id/res_activos" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnGuardar"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="232dp"
         android:layout_height="54dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:onClick="guardarProceso"
         android:text="Guardar"
         android:textSize="18dp"
         app:backgroundTint="#BDBBBB"
         app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/observacion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

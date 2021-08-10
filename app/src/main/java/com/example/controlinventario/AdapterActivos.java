@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHolder>{
@@ -65,6 +66,14 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
                 checkBoxValidar.setChecked(true);
             else
                 checkBoxValidar.setChecked(false);
+        }
+
+        String estadosActivos(){
+            //List<String> estados = new ArrayList<>();
+            if(this.checkBoxValidar.isChecked())
+
+            return 'jiji';
+
         }
 
     }
