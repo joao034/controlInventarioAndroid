@@ -35,9 +35,7 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
     @Override
     public void onBindViewHolder(final AdapterActivos.ViewHolder holder, final int position) {
         holder.bindData(lista.get(position));
-        /*ProcesoValidacionDetalle detalle = lista.get(position);
-        holder.funcionario.setText(detalle.getFuncionario().getNombre() + " " +  detalle.getFuncionario().getApellido());
-        holder.estado.setText(detalle.getEstado());*/
+
     }
 
     public void setItems(List<Activo> listaItems){
@@ -50,30 +48,24 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView activo, codBarras;
+        TextView activo, codBarras, idActivo;
         CheckBox checkBoxValidar;
         ViewHolder(View itemView) {
             super(itemView);
             activo = itemView.findViewById(R.id.activo);
+            idActivo = itemView.findViewById(R.id.idActivo);
             codBarras = itemView.findViewById(R.id.codBarras);
             checkBoxValidar = itemView.findViewById(R.id.checkBoxValidar);
         }
 
         void bindData(final Activo item){
             activo.setText(item.getNombre());
+            idActivo.setText("ID: "+ item.getId());
             codBarras.setText("Cod. Barras: "+ item.getCodBarras());
             if(item.getRevision().equalsIgnoreCase("S"))
                 checkBoxValidar.setChecked(true);
             else
                 checkBoxValidar.setChecked(false);
-        }
-
-        String estadosActivos(){
-            //List<String> estados = new ArrayList<>();
-            if(this.checkBoxValidar.isChecked())
-
-            return 'jiji';
-
         }
 
     }
