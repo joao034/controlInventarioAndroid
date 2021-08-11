@@ -35,7 +35,9 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
     @Override
     public void onBindViewHolder(final AdapterActivos.ViewHolder holder, final int position) {
         holder.bindData(lista.get(position));
-
+        /*ProcesoValidacionDetalle detalle = lista.get(position);
+        holder.funcionario.setText(detalle.getFuncionario().getNombre() + " " +  detalle.getFuncionario().getApellido());
+        holder.estado.setText(detalle.getEstado());*/
     }
 
     public void setItems(List<Activo> listaItems){
@@ -70,4 +72,6 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
 
     }
 
-}
+    }
+
+

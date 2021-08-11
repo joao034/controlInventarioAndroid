@@ -60,8 +60,8 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
     public void cargarActivos(String idFuncionario){
-        //String URL = "http://192.168.100.123/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
-        String URL = "http://192.168.100.3/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
+        String URL = "http://192.168.100.123/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
+        //String URL = "http://192.168.100.3/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -94,8 +94,11 @@ public class DescriptionActivity extends AppCompatActivity {
         else
             estado = "EN CURSO";
 
-        String URL = "http://192.168.100.3/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
-                    "&obs=" + obs + "&estadoProceso=" + estado;
+        /*String URL = "http://192.168.100.3/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
+                    "&obs=" + obs + "&estadoProceso=" + estado;*/
+
+        String URL = "http://192.168.100.123/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
+                "&obs=" + obs + "&estadoProceso=" + estado;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
