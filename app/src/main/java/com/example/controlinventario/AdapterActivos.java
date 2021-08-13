@@ -7,8 +7,16 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +60,7 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView activo, codBarras, idActivo;
         CheckBox checkBoxValidar;
+        RequestQueue queue1;
         ViewHolder(View itemView) {
             super(itemView);
             activo = itemView.findViewById(R.id.activo);
@@ -68,8 +77,51 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
                 checkBoxValidar.setChecked(true);
             else
                 checkBoxValidar.setChecked(false);
+
+            checkBoxValidar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(checkBoxValidar.isChecked())
+                        validarActivo(item.getId());
+                    else
+                        invalidarActivo(item.getId());
+                }
+            });
         }
 
+        void validarActivo(String idActivo){
+            String URL = "http://192.168.100.123/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+            //String URL = "http://192.168.100.3/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(context, "Activo Validado", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            queue1 = Volley.newRequestQueue(context);
+            queue1.add(stringRequest);
+        }
+
+        void invalidarActivo(String idActivo){
+            String URL = "http://192.168.100.123/servicios/invalidarActivo.php?idActivo=" + idActivo;
+            //String URL = "http://192.168.100.3/servicios/invalidarActivo.php?idActivo=" + idActivo;
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(context, "Activo Invalidado", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+            queue1 = Volley.newRequestQueue(context);
+            queue1.add(stringRequest);
+        }
     }
 
     }
