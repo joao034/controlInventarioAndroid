@@ -36,11 +36,11 @@
         android:id="@+id/res_activos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreFuncionario" />
+        app:layout_constraintTop_toBottomOf="@+id/btnScan" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/observacion"
@@ -58,14 +58,14 @@
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="232dp"
         android:layout_height="54dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:onClick="guardarProceso"
         android:text="Guardar"
         android:textSize="18dp"
         app:backgroundTint="#BDBBBB"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
@@ -73,12 +73,23 @@
         android:id="@+id/checkBox"
         android:layout_width="262dp"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="20dp"
         android:text="La revisión de activos de este funcionario ha concluido"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/observacion"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btnScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Escanear Código de Barras"
+        android:onClick="escanearCodigoBarras"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombreFuncionario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

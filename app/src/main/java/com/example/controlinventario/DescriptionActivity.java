@@ -22,6 +22,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
@@ -33,12 +35,13 @@ public class DescriptionActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RequestQueue queue1, queue2;
     ProcesoValidacionDetalle element;
-    Button btnGuardar;
+    Button btnGuardar, btnScan;
     TextView tituloDescripcion;
     TextView nombreFuncionario;
     AdapterActivos adapterActivos;
     TextInputEditText observacion;
     CheckBox checkbox;
+    private String codigoBarras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class DescriptionActivity extends AppCompatActivity {
         tituloDescripcion = findViewById(R.id.tituloDescripcion);
         nombreFuncionario = findViewById(R.id.nombreFuncionario);
         btnGuardar = findViewById(R.id.btnGuardar);
+        btnScan = findViewById(R.id.btnScan);
         observacion = findViewById(R.id.observacion);
         checkbox = findViewById(R.id.checkBox);
 
@@ -58,6 +62,8 @@ public class DescriptionActivity extends AppCompatActivity {
         if (element.getEstado().equalsIgnoreCase("FINALIZADO"))
             checkbox.setChecked(true);
     }
+
+
 
     public void cargarActivos(String idFuncionario){
         String URL = "http://192.168.100.123/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
@@ -119,5 +125,36 @@ public class DescriptionActivity extends AppCompatActivity {
         queue2 = Volley.newRequestQueue(this);
         queue2.add(stringRequest);
     }
+
+    public void escanearCodigoBarras(View view){
+        IntentIntegrator integrator = new IntentIntegrator(DescriptionActivity.this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+        //Titulo
+        integrator.setPrompt("Lector - CDP");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(true);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.initiateScan();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if ( result != null ){
+            if ( result.getContents() == null )
+                Toast.makeText(this, "Lector cancelado", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                this.codigoBarras = result.getContents();
+        }else
+            super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void validarActivoPorCodigoBarras(){
+
+    }
+
+
+
 
 }

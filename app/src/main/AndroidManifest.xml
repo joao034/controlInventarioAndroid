@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ControlInventario"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true">
+
         <activity
             android:name=".DescriptionActivity"
             android:exported="true" />

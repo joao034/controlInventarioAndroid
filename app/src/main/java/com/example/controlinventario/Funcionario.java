@@ -1,10 +1,13 @@
 package com.example.controlinventario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Funcionario implements Serializable {
     private String id, nombre, apellido;
     private int numActivos;
+    List<Activo> activos;
 
     public Funcionario(String id) {
         this.id = id;
@@ -15,6 +18,7 @@ public class Funcionario implements Serializable {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numActivos = numActivos;
+        this.activos = new ArrayList<>();
     }
 
     public String getId() {
