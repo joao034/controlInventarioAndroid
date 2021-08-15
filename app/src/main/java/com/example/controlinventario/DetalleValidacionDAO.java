@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetalleValidacionDAO {
+    ActivoDAO dao;
+    List<Activo> activos;
     List<ProcesoValidacionDetalle> listarProcesos(String response){
         List<ProcesoValidacionDetalle> procesos = new ArrayList();
         try {
@@ -20,6 +22,7 @@ public class DetalleValidacionDAO {
                                 jsonObject.getJSONObject(""+i+"").get("NOM_FUN").toString(),
                                 jsonObject.getJSONObject(""+i+"").get("APE_FUN").toString(),
                                 Integer.valueOf(jsonObject.getJSONObject(""+i+"").get("NUM_ACT_FUN").toString())
+                                //activos = dao.activosDeFuncionario(jsonObject.getJSONObject(""+i+"").get("ID_FUN_PER").toString())
                                 ),
                         jsonObject.getJSONObject(""+i+"").get("OBS_REV").toString(),
                         jsonObject.getJSONObject(""+i+"").get("EST_PRO").toString()));

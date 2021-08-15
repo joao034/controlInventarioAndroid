@@ -9,16 +9,13 @@ public class Funcionario implements Serializable {
     private int numActivos;
     List<Activo> activos;
 
-    public Funcionario(String id) {
-        this.id = id;
-    }
 
     public Funcionario(String id, String nombre, String apellido, int numActivos) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.numActivos = numActivos;
-        this.activos = new ArrayList<>();
+        this.activos = DescriptionActivity.listaActivos;
     }
 
     public String getId() {
@@ -51,6 +48,14 @@ public class Funcionario implements Serializable {
 
     public void setNumActivos(int numActivos) {
         this.numActivos = numActivos;
+    }
+
+    public List<Activo> getActivos() {
+        return activos;
+    }
+
+    public void setActivos(List<Activo> activos) {
+        this.activos = activos;
     }
 
     @Override

@@ -18,6 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +76,7 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
             activo.setText(item.getNombre());
             idActivo.setText("ID: "+ item.getId());
             codBarras.setText("Cod. Barras: "+ item.getCodBarras());
-            if(item.getRevision().equalsIgnoreCase("S"))
+            if(item.getRevision().equalsIgnoreCase("S") || DescriptionActivity.idActivoValidadoPorScan != null)
                 checkBoxValidar.setChecked(true);
             else
                 checkBoxValidar.setChecked(false);
@@ -95,7 +98,7 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(context, "Activo Validado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Activo Validado" , Toast.LENGTH_SHORT).show();
                 }
             }, new Response.ErrorListener() {
                 @Override

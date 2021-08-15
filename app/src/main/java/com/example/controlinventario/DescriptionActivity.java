@@ -25,23 +25,29 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class DescriptionActivity extends AppCompatActivity {
 
     private static final String TAG = "DescriptionActivity";
-    private List<Activo> listaActivos;
+    public static List<Activo> listaActivos;
     RecyclerView recyclerView;
     RequestQueue queue1, queue2;
-    ProcesoValidacionDetalle element;
+    static RequestQueue queue;
+    static ProcesoValidacionDetalle element;
     Button btnGuardar, btnScan;
     TextView tituloDescripcion;
     TextView nombreFuncionario;
     AdapterActivos adapterActivos;
     TextInputEditText observacion;
     CheckBox checkbox;
-    private String codigoBarras;
+    public static String idActivoValidadoPorScan = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +69,7 @@ public class DescriptionActivity extends AppCompatActivity {
             checkbox.setChecked(true);
     }
 
-
-
-    public void cargarActivos(String idFuncionario){
+    public List<Activo> cargarActivos(String idFuncionario){
         String URL = "http://192.168.100.123/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
         //String URL = "http://192.168.100.3/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -89,6 +93,7 @@ public class DescriptionActivity extends AppCompatActivity {
         });
         queue1 = Volley.newRequestQueue(this);
         queue1.add(stringRequest);
+        return listaActivos;
     }
 
     public void guardarProceso(View view){
@@ -110,7 +115,6 @@ public class DescriptionActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                     Toast.makeText(DescriptionActivity.this, "Guardado Correctamente", Toast.LENGTH_SHORT).show();
-
                     Intent refresh = new Intent(DescriptionActivity.this, MainActivity.class);
                     startActivity(refresh);
                     DescriptionActivity.this.finish();
@@ -137,24 +141,26 @@ public class DescriptionActivity extends AppCompatActivity {
         integrator.initiateScan();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if ( result != null ){
-            if ( result.getContents() == null )
+            if ( result.getContents() == null ) {
                 Toast.makeText(this, "Lector cancelado", Toast.LENGTH_LONG).show();
-            else
+            }else{
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-                this.codigoBarras = result.getContents();
+                idActivoValidadoPorScan = validarActivoPorScanner(result.getContents());
+            }
         }else
             super.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void validarActivoPorCodigoBarras(){
-
+    public String validarActivoPorScanner(String resultadoScan){
+        for( int i = 0; i < listaActivos.size() ;i++ ){
+            if (listaActivos.get(i).getCodBarras().equals(resultadoScan))
+                return listaActivos.get(i).getId();
+        }
+        return null;
     }
-
-
-
 
 }
