@@ -93,12 +93,13 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
         }
 
         void validarActivo(String idActivo){
-            String URL = "http://192.168.100.123/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+            //String URL = "http://192.168.100.123/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+            String URL = "http://192.168.2.111/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
             //String URL = "http://192.168.100.3/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(context, "Activo Validado" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "'"+ idActivo + "' Validado" , Toast.LENGTH_SHORT).show();
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -110,12 +111,13 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
         }
 
         void invalidarActivo(String idActivo){
-            String URL = "http://192.168.100.123/servicios/invalidarActivo.php?idActivo=" + idActivo;
+            //String URL = "http://192.168.100.123/servicios/invalidarActivo.php?idActivo=" + idActivo;
+            String URL = "http://192.168.2.111/servicios/invalidarActivo.php?idActivo=" + idActivo;
             //String URL = "http://192.168.100.3/servicios/invalidarActivo.php?idActivo=" + idActivo;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(context, "Activo Invalidado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "'"+ idActivo + "' Invalidado", Toast.LENGTH_SHORT).show();
                 }
             }, new Response.ErrorListener() {
                 @Override

@@ -68,7 +68,8 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
     public List<Activo> cargarActivos(String idFuncionario){
-        String URL = "http://192.168.100.123/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
+        //String URL = "http://192.168.100.123/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
+        String URL = "http://192.168.2.111/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
         //String URL = "http://192.168.100.3/servicios/cargarActivosDeFuncionario.php?funcionario=" + idFuncionario;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -106,7 +107,10 @@ public class DescriptionActivity extends AppCompatActivity {
         /*String URL = "http://192.168.100.3/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
                     "&obs=" + obs + "&estadoProceso=" + estado;*/
 
-        String URL = "http://192.168.100.123/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
+        /*String URL = "http://192.168.100.3/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
+                    "&obs=" + obs + "&estadoProceso=" + estado;*/
+
+        String URL = "http://192.168.2.111/servicios/actualizarEstadoProceso.php?idProcesoDet=" + idProceso +
                 "&obs=" + obs + "&estadoProceso=" + estado;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -167,12 +171,13 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
     void validarActivo(String idActivo){
-        String URL = "http://192.168.100.123/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+        //String URL = "http://192.168.100.123/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+        String URL = "http://192.168.2.111/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
         //String URL = "http://192.168.100.3/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(DescriptionActivity.this, "Activo Validado" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(DescriptionActivity.this, "'"+ idActivo + "' Validado", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

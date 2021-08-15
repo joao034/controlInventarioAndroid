@@ -1,6 +1,8 @@
 package com.example.controlinventario;
 
-public class Activo {
+import java.io.Serializable;
+
+public class Activo implements Serializable {
     private String id, nombre, estado, codBarras, idFuncionario, revision;
 
     public Activo(String id, String nombre, String estado, String codBarras, String idFuncionario, String revision) {

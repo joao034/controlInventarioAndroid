@@ -1,8 +1,9 @@
 package com.example.controlinventario;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProcesoValidacion {
+public class ProcesoValidacion implements Serializable {
     private int id;
     private String titulo, fecha;
     List<ProcesoValidacionDetalle> detalles;
