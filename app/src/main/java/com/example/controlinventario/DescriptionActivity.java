@@ -46,8 +46,6 @@ public class DescriptionActivity extends AppCompatActivity {
     AdapterActivos adapterActivos;
     TextInputEditText observacion;
     CheckBox checkbox;
-    public static String idActivoValidadoPorScan = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,19 +146,41 @@ public class DescriptionActivity extends AppCompatActivity {
                 Toast.makeText(this, "Lector cancelado", Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-                idActivoValidadoPorScan = validarActivoPorScanner(result.getContents());
+                validarActivoPorScanner(result.getContents());
             }
         }else
             super.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public String validarActivoPorScanner(String resultadoScan){
+    public boolean validarActivoPorScanner(String resultadoScan){
         for( int i = 0; i < listaActivos.size() ;i++ ){
-            if (listaActivos.get(i).getCodBarras().equals(resultadoScan))
-                return listaActivos.get(i).getId();
+            if (listaActivos.get(i).getCodBarras().equals(resultadoScan)){
+                listaActivos.get(i).setRevision("S");
+                validarActivo(listaActivos.get(i).getId());
+                this.recreate();
+                return true;
+            }
+
         }
-        return null;
+        return false;
+    }
+
+    void validarActivo(String idActivo){
+        String URL = "http://192.168.100.123/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+        //String URL = "http://192.168.100.3/servicios/actualizarRevisionActivo.php?idActivo=" + idActivo;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(DescriptionActivity.this, "Activo Validado" , Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        queue1 = Volley.newRequestQueue(this);
+        queue1.add(stringRequest);
     }
 
 }

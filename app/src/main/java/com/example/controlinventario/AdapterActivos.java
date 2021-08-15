@@ -76,7 +76,7 @@ public class AdapterActivos extends RecyclerView.Adapter<AdapterActivos.ViewHold
             activo.setText(item.getNombre());
             idActivo.setText("ID: "+ item.getId());
             codBarras.setText("Cod. Barras: "+ item.getCodBarras());
-            if(item.getRevision().equalsIgnoreCase("S") || DescriptionActivity.idActivoValidadoPorScan != null)
+            if(item.getRevision().equalsIgnoreCase("S"))
                 checkBoxValidar.setChecked(true);
             else
                 checkBoxValidar.setChecked(false);
